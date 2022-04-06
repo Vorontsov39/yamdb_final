@@ -10,7 +10,7 @@ services:
       - /var/lib/postgresql/data/
       - ./.env
   web:
-    build: .
+    image: robin39/final:v1.0.1
     restart: always
     volumes:
       - static_value:/app/static/
