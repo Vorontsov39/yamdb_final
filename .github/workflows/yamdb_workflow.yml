@@ -42,7 +42,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: robin39/final:v1.0.1
+          tags: robin39/inal:v1.0.1
   
 deploy:
     runs-on: ubuntu-latest
@@ -66,7 +66,7 @@ deploy:
             echo DB_HOST=${{ secrets.DB_HOST }} >> .env
             echo DB_PORT=${{ secrets.DB_PORT }} >> .env
             sudo docker-compose up -d
-
+  
   send_message:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
