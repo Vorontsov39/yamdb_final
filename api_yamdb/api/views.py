@@ -1,41 +1,26 @@
 from django.db.models import Avg
 from django.shortcuts import get_object_or_404
+from django_filters import CharFilter, FilterSet, NumberFilter
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import (filters, generics, permissions, status, viewsets)
-from rest_framework.mixins import (
-    CreateModelMixin,
-    DestroyModelMixin,
-    ListModelMixin
-)
+from rest_framework import filters, generics, permissions, status, viewsets
+from rest_framework.decorators import action
+from rest_framework.mixins import (CreateModelMixin, DestroyModelMixin,
+                                   ListModelMixin)
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.response import Response
-from rest_framework.decorators import action
 from rest_framework_simplejwt.tokens import RefreshToken
-
-
-from django_filters import CharFilter, FilterSet, NumberFilter
 from reviews.models import Category, Genre, Title
 from users.models import UserProfile
-from .permissions import (
-    IsAuthorOrReadOnly,
-    IsRoleAdmin,
-    IsRoleModerator,
-    ReadOnly
-)
-from .serializers import (
-    CategorySerializer,
-    CommentSerializer,
-    GenreSerializer,
-    ProfileRegisterSerializer,
-    ProfileSerializer,
-    ProfileSerializerAdmin,
-    ReviewSerializer,
-    TitleSerializer,
-    TitleSerializerCreate,
-    TokenRestoreSerializer,
-    TokenSerializer
-)
+
+from .permissions import (IsAuthorOrReadOnly, IsRoleAdmin, IsRoleModerator,
+                          ReadOnly)
 from .sendmail import mail
+from .serializers import (CategorySerializer, CommentSerializer,
+                          GenreSerializer, ProfileRegisterSerializer,
+                          ProfileSerializer, ProfileSerializerAdmin,
+                          ReviewSerializer, TitleSerializer,
+                          TitleSerializerCreate, TokenRestoreSerializer,
+                          TokenSerializer)
 
 
 class TitleFilterBackend(FilterSet):
@@ -133,9 +118,9 @@ class ProfileViewSet(viewsets.ModelViewSet):
             data=request.data,
             partial=True
         )
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
+        serializer.is_valid()
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class CommentViewSet(viewsets.ModelViewSet):

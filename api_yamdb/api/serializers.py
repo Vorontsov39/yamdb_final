@@ -1,5 +1,6 @@
-from django.core.exceptions import ValidationError
 from datetime import datetime
+
+from django.core.exceptions import ValidationError
 from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
@@ -111,8 +112,7 @@ class ReviewSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 'Можно оставить только один отзыв на произведение'
             )
-        review = Review.objects.create(**validated_data)
-        return review
+        return Review.objects.create(**validated_data)
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -136,7 +136,7 @@ class TitleSerializer(serializers.ModelSerializer):
         model = Title
         fields = '__all__'
 
-    def year_validator(value):
+    def year_validator(self, value):
         if value > datetime.now().year:
             raise ValidationError(
                 ('%(value)s is not a correcrt year!'),
