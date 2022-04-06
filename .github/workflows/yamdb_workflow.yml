@@ -42,7 +42,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: tastybaev/yamdb_final:latest
+          tags: robin39/final:v1.0.1
   
 deploy:
     runs-on: ubuntu-latest
