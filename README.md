@@ -1,6 +1,7 @@
 # vorontsov39/infra_sp2
 Проект YaMDb позволяет добавлять новых пользователей,
 собирает отзывы пользователей на различные произведения.
+![workflow](https://github.com/vorontsov39/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
 
 ### Авторы:
 - Vorontsov Anton (Vorontsov39) https://github.com/Vorontsov39
@@ -24,7 +25,7 @@
 Клонировать репозиторий и перейти в него в командной строке:
 
 ```bash
-git clone https://github.com/vorontsov39/infra_sp2.git
+git clone https://github.com/vorontsov39/yamdb_final.git
 ```
 
 ```bash
