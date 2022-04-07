@@ -1,10 +1,16 @@
-# vorontsov39/infra_sp2
-Проект YaMDb позволяет добавлять новых пользователей,
-собирает отзывы пользователей на различные произведения.
-![workflow](https://github.com/vorontsov39/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
+### Проект Yandb_final
 
-### Авторы:
-- Vorontsov Anton (Vorontsov39) https://github.com/Vorontsov39
+![example workflow]![workflow](https://github.com/vorontsov39/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
+
+### Описание проекта:
+
+С помощью данного проекта можно развернуть образ приложения api_yamdb (проект по сбору отзывов о музыкальных произведениях) на своём сервере.
+Принцип подключения следующий: 
+1) с помощью настроек файла "yamdb_workflow.yml" происходит подключение к проекту на ресурсе GitHub, с помощью GitHub Actions производится автоматическая проверка кода линтером flake8, запусков тестов, а также сборка docker-образа и деплой проекта. При успешном выполнении всех шагов, на телеграм-бот приходит соответствующее сообщение;
+2) сборка docker-образа происходит на основании файлов Dockerfile и docker-compose.yaml, где прописаны соответствующие инструкции. Образ собирается на интернет сервисе DockerHub, создаются 3 контейнера: web, db и nginx;
+3) проект запускается из сервиса DockerHub, после успешного запуска всех 3-х контейнеров. 
+
+Проект доступен по ссылке - http://178.154.205.193/redoc/
 
 ## стек:
 - Python
@@ -13,76 +19,50 @@
 - Docker
 - Nginx
 
+## Подготовка и запуск проекта:
 
-## руководство по установке Docker
-можно найти [здесь](https://docs.docker.com/engine/install/)
+Клонировать репозиторий:
 
-
----
-
-## Как запустить проект:
-
-Клонировать репозиторий и перейти в него в командной строке:
-
-```bash
+```
 git clone https://github.com/vorontsov39/yamdb_final.git
 ```
 
-```bash
-cd api_yamdb/
+Запустить docker-compose:
+
 ```
-
-Cоздать и активировать виртуальное окружение:
-
-```bash
-python3 -m venv env
-```
-
-```bash
-source env/bin/activate
-```
-
-```bash
-python3 -m pip install --upgrade pip
-```
-
-Установить зависимости из файла requirements.txt:
-
-```bash
-pip install -r requirements.txt
-```
-
-Запустить приложение в контейнерах:
-
-*из директории `infra/`*
-```bash
 docker-compose up -d --build
 ```
 
-Выполнить миграции:
+Выполнить миграции, создать суперпользователя, собрать статику.
 
-*из директории `infra/`*
-```bash
+```
 docker-compose exec web python manage.py migrate
-```
-
-Создать суперпользователя:
-
-*из директории `infra/`*
-```bash
 docker-compose exec web python manage.py createsuperuser
+docker-compose exec web python manage.py collectstatic --no-input 
 ```
 
-Собрать статику:
+Создать файл .env из директории infra/ и внестите в него данные:
 
-*из директории `infra/`*
-```bash
-docker-compose exec web python manage.py collectstatic --no-input
+```
+DB_ENGINE=django.db.backends.postgresql
+DB_NAME=postgres
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD= # установите свой пароль
+DB_HOST=db
+DB_PORT=5432
 ```
 
-Остановить приложение в контейнерах:
+## Страницы проекта:
 
-*из директории `infra/`*
-```bash
-docker-compose down -v
-```
+Посмотреть все возможности можно по ссылке http://178.154.205.193/redoc/:
+- регистрация пользователей
+- получение JWT-токенов
+- страница с музыкальными категориями
+- страница с музыкальными жанрами
+- работа с отзывами
+- работа с комментариями к отзывам
+- просмотр пользователей
+
+## Автор:
+Воронцов Антон - https://github.com/vorontsov39
+
