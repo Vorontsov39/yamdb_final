@@ -10,7 +10,7 @@ services:
       - /var/lib/postgresql/data/
       - ./.env
   web:
-    image: robin39/final:v1.0.1
+    image: robin39/gates:v1.1.1
     restart: always
     volumes:
       - static_value:/app/api_yamdb/static/
