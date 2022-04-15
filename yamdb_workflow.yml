@@ -41,7 +41,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: tastybaev/yamdb_final:latest
+          tags: robin39/gates:v1.1.1
   
 deploy:
     runs-on: ubuntu-latest
