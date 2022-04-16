@@ -1,5 +1,5 @@
 ### Проект Yandb_final
-[workflow](https://github.com/vorontsov39/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
+[![Actions Status](https://github.com/Vorontsov39/yamdb_final/workflows/yamdb_workflow/badge.svg)](https://Vorontsov39/yamdb_final/actions)
 
 ### Описание проекта:
 
