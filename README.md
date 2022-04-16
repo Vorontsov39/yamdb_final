@@ -1,6 +1,6 @@
 ### Проект Yandb_final
 [![Actions Status](https://github.com/Vorontsov39/yamdb_final/workflows/yamdb_workflow/badge.svg)](https://Vorontsov39/yamdb_final/actions)
-![example workflow](https://github.com/lindex/yamdb_final/actions/workflows/yamdb_workflow/badge.svg)
+
 
 ### Описание проекта:
 
